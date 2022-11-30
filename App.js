@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  Platform,
   Alert,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
@@ -28,8 +29,14 @@ const App = () => {
       return;
     }
 
-    setSelectedImage({ localUri: pickerResult.assets[0].uri });
-    console.log(pickerResult.assets[0].uri);
+    if(Platform.OS === 'web') {
+      setSelectedImage({ localUri: pickerResult.assets[0].uri });
+      alert('The image is avaliable at: '+ pickerResult.assets[0].uri)
+    } else {
+      setSelectedImage({ localUri: pickerResult.assets[0].uri });
+
+    }
+
   };
 
   const openShareDialog = async () => {
